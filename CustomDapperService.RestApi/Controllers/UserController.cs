@@ -15,6 +15,7 @@ public class UserController : ControllerBase
         _dapperService = dapperService;
     }
 
+    #region Get Users
     [HttpGet]
     public async Task<IActionResult> GetUsers()
     {
@@ -42,7 +43,9 @@ public class UserController : ControllerBase
             throw new Exception(ex.Message);
         }
     }
+    #endregion
 
+    #region Get User
     [HttpPost]
     public async Task<IActionResult> GetUser(int id)
     {
@@ -71,5 +74,6 @@ public class UserController : ControllerBase
         {
             throw new Exception(ex.Message);
         }
+        #endregion
     }
 }
