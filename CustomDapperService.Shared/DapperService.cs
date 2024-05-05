@@ -20,6 +20,7 @@ public class DapperService
         List<T> lst = db.Query<T>(query, parameters).ToList();
         return lst;
     }
+
     #endregion
 
     #region Query Async
