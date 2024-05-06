@@ -36,16 +36,16 @@ public class DapperService
     public T QueryFirstOrDefault<T>(string query, object? parameters = null)
     {
         using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
-        T item = db.Query<T>(query, parameters).FirstOrDefault()!;
+        T item = db.QueryFirstOrDefault<T>(query, parameters)!;
         return item!;
     }
     #endregion
 
     #region Query First Or Default Async
-    public async Task<IEnumerable<T>> QueryFirstOrDefaultAsync<T>(string query, object? parameters = null)
+    public async Task<T> QueryFirstOrDefaultAsync<T>(string query, object? parameters = null)
     {
         using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
-        var item = await db.QueryAsync<T>(query, parameters);
+        T? item = await db.QueryFirstOrDefaultAsync<T>(query, parameters);
         return item!;
     }
     #endregion

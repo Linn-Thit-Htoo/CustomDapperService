@@ -1,4 +1,5 @@
 ﻿using CustomDapperService.RestApi.Models;
+using CustomDapperService.RestApi.Query;
 using CustomDapperService.Shared;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,21 +23,9 @@ public class UserController : ControllerBase
     {
         try
         {
-            string query = @"SELECT [UserId]
-      ,[UserName]
-      ,[Email]
-      ,[Password]
-      ,[UserRole]
-      ,[Age]
-      ,[Gender]
-      ,[Address]
-      ,[IsActive]
-  FROM [dbo].[Users] WHERE IsActive = @IsActive ORDER BY UserId DESC";
-            var parameters = new
-            {
-                IsActive = true
-            };
-            IEnumerable<UserModel> lst = await _dapperService.QueryAsync<UserModel>(query, parameters);
+            string query = UserQueryList.GetAllUsersQuery();
+            IEnumerable<UserModel> lst = await _dapperService.QueryAsync<UserModel>(query, new { IsActive = true });
+
             return Ok(lst);
         }
         catch (Exception ex)
@@ -49,29 +38,20 @@ public class UserController : ControllerBase
 
     #region Get User
 
-    [HttpPost]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetUser(int id)
     {
         try
         {
-            string query = @"SELECT [UserId]
-      ,[UserName]
-      ,[Email]
-      ,[Password]
-      ,[UserRole]
-      ,[Age]
-      ,[Gender]
-      ,[Address]
-      ,[IsActive]
-  FROM [dbo].[Users] WHERE UserId = @UserId AND IsActive = @IsActive ORDER BY UserId DESC";
+            string query = UserQueryList.GetUserQuery();
             var parameters = new
             {
                 UserId = id,
                 IsActive = true
             };
-            IEnumerable<UserModel> item = await _dapperService.QueryFirstOrDefaultAsync<UserModel>(query, parameters);
+            UserModel? item = await _dapperService.QueryFirstOrDefaultAsync<UserModel>(query, parameters);
 
-            return Ok(item);
+            return Ok(item); // if null, default 204
         }
         catch (Exception ex)
         {
