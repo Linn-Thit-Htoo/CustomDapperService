@@ -24,7 +24,7 @@ public class UserController : ControllerBase
         try
         {
             string query = UserQueryList.GetAllUsersQuery();
-            IEnumerable<UserModel> lst = await _dapperService.QueryAsync<UserModel>(query, new { IsActive = true });
+            IQueryable<UserModel> lst = await _dapperService.QueryAsync<UserModel>(query, new { IsActive = true });
 
             return Ok(lst);
         }

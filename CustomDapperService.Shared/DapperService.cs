@@ -24,11 +24,11 @@ public class DapperService
     #endregion
 
     #region Query Async
-    public async Task<IEnumerable<T>> QueryAsync<T>(string query, object? parameters = null)
+    public async Task<IQueryable<T>> QueryAsync<T>(string query, object? parameters = null)
     {
         using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
-        IEnumerable<T> lst = await db.QueryAsync<T>(query, parameters);
-        return lst;
+        var lst = await db.QueryAsync<T>(query, parameters);
+        return lst.AsQueryable();
     }
     #endregion
 
