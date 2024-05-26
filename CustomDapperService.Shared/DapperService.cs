@@ -14,6 +14,7 @@ public class DapperService
     }
 
     #region Query
+
     public List<T> Query<T>(string query, object? parameters = null)
     {
         using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
