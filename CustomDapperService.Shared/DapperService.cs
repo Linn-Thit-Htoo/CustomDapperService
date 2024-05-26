@@ -47,6 +47,7 @@ public class DapperService
     #endregion
 
     #region Query First Or Default Async
+
     public async Task<T> QueryFirstOrDefaultAsync<T>(string query, object? parameters = null)
     {
         using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
