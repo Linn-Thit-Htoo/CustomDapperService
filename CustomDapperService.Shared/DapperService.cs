@@ -43,6 +43,7 @@ public class DapperService
         T item = db.QueryFirstOrDefault<T>(query, parameters)!;
         return item!;
     }
+
     #endregion
 
     #region Query First Or Default Async
