@@ -58,6 +58,7 @@ public class DapperService
     #endregion
 
     #region Execute
+
     public int Execute(string sql, object? parameters = null)
     {
         using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
