@@ -32,6 +32,7 @@ public class DapperService
         var lst = await db.QueryAsync<T>(query, parameters);
         return lst.AsQueryable();
     }
+
     #endregion
 
     #region Query First Or Default
