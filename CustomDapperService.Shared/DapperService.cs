@@ -76,5 +76,6 @@ public class DapperService
         int result = await db.ExecuteAsync(sql, parameters);
         return result;
     }
+
     #endregion
 }
