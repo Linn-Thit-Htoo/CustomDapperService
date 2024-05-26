@@ -54,6 +54,7 @@ public class DapperService
         T? item = await db.QueryFirstOrDefaultAsync<T>(query, parameters);
         return item!;
     }
+
     #endregion
 
     #region Execute
